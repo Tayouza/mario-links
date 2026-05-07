@@ -44,10 +44,11 @@
                     src="https://lh3.googleusercontent.com/aida/ADBb0uiR1HQmZvlXIM7NP1Wihn0VCpANsDlTSSygY67UB8Zmvd6VbdWZBQg33Y10BTxfxMubF6r5WZsJMrQy6uWlx6_CkNmtVo5LK0R28bnV5SSWzhYM1MaQkXNGORPwiVrXRFj_sUximCRFLlBhwcVgKp8euxZUW2ER2fjxYQNR91kAxV2K9oPdTyztzAfxc3TAoElTaNjSihjyTuALoB26X3r5w3uH9e9SrN20XzyMZMnzaQqSsUU8Py78NP8AYZtqViuhcf2qJ4M_4XE" />
             </div>
             <h1 class="font-headline-lg text-headline-lg text-on-surface mb-3 text-center">Mário Ferreira</h1>
-            <div
+            <div id="status-container"
                 class="flex items-center gap-2 bg-surface-container-high rounded-full px-4 py-1.5 border border-surface-variant">
-                <div class="w-2 h-2 rounded-full bg-green-500 pulse-dot"></div>
-                <span class="font-label-caps text-label-caps text-on-surface uppercase">Online Agora</span>
+                <div id="status-dot" class="w-2 h-2 rounded-full bg-green-500 pulse-dot"></div>
+                <span id="status-text" class="font-label-caps text-label-caps text-on-surface uppercase">Online
+                    Agora</span>
             </div>
         </div>
         <!-- Links Stack -->
@@ -140,21 +141,21 @@
         </div>
     </footer>
     <script>
-        document.getElementById('copy-btn').addEventListener('click', function() {
+        document.getElementById('copy-btn').addEventListener('click', function () {
             const r6Id = document.getElementById('r6-id').innerText;
             const btn = this;
             const btnText = btn.querySelector('span:last-child');
             const icon = btn.querySelector('span:first-child');
-            
+
             navigator.clipboard.writeText(r6Id).then(() => {
                 const originalText = btnText.innerText;
                 const originalIcon = icon.innerText;
-                
+
                 btnText.innerText = 'Copiado!';
                 icon.innerText = 'check';
                 btn.classList.add('bg-green-600', 'text-white');
                 btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-                
+
                 setTimeout(() => {
                     btnText.innerText = originalText;
                     icon.innerText = originalIcon;
@@ -163,6 +164,34 @@
                 }, 2000);
             });
         });
+
+        // Online Status Logic (13h - 20h GMT-3)
+        function updateOnlineStatus() {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+
+            const now = new Date();
+            // Get UTC time
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            // Convert UTC to GMT-3
+            const brTime = new Date(utc + (3600000 * -3));
+            const hours = brTime.getHours();
+
+            const isOnline = hours >= 13 && hours < 20;
+
+            if (isOnline) {
+                statusDot.classList.add('bg-green-500', 'pulse-dot');
+                statusDot.classList.remove('bg-zinc-500');
+                statusText.innerText = 'Online Agora';
+            } else {
+                statusDot.classList.remove('bg-green-500', 'pulse-dot');
+                statusDot.classList.add('bg-zinc-500');
+                statusText.innerText = 'Offline';
+            }
+        }
+
+        updateOnlineStatus();
+        setInterval(updateOnlineStatus, 60000); // Update every minute
     </script>
 </body>
 
