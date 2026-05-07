@@ -1,0 +1,102 @@
+body {
+    background-image: linear-gradient(to bottom, rgba(19, 19, 19, 0.85), rgba(19, 19, 19, 1)), url(https://lh3.googleusercontent.com/aida/ADBb0uhrlO7v55jJbnM3seib90_CX-41k_0VvTWJAw_Qmk_6BJBt66-199N8Dvqw64VbKCL4CAoIMRJG2P3pHu0rxuFO4G3Ztz4F7mXlzgEU7BcZfFpKMFk_KSv2k2Nfmw0moSOMtmUGxiA4YBPykXXTn5jkX2jiAtokuh4olJfjCbpVt4zDPJ9fxPMh1Rl8o3dJ4-Y6CBOKPK7hrrUilSO-cBPxvhOusSlgtCXcA6mCVdUDh4RK11wq4cReYnKVtZoU8f5SJ1pA5GbI8PM);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed
+}
+
+.glass-card {
+    background-color: rgba(18, 18, 18, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+}
+
+.glass-card:hover:not(.disabled) {
+    border-color: #FF9800;
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.3);
+    transform: scale(1.02);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)
+}
+
+.pulse-border {
+    animation: pulse-glow 2s infinite
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4);
+        border-color: rgba(255, 152, 0, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 152, 0, 0);
+        border-color: rgba(255, 152, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 152, 0, 0);
+        border-color: rgba(255, 152, 0, 0.5);
+    }
+}
+
+.pulse-dot {
+    animation: pulse-dot 2s infinite
+}
+
+@keyframes pulse-dot {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-1 {
+    animation-delay: 50ms
+}
+
+.delay-2 {
+    animation-delay: 100ms
+}
+
+.delay-3 {
+    animation-delay: 150ms
+}
+
+.delay-4 {
+    animation-delay: 200ms
+}
+
+.delay-5 {
+    animation-delay: 250ms
+}
+
+.icon-mask {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    background-color: currentColor;
+    display: inline-block;
+}
