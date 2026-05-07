@@ -30,7 +30,7 @@
         class="flex justify-between items-center px-margin-x py-4 w-full max-w-container-max mx-auto bg-transparent text-primary font-headline-md text-headline-md docked full-width top-0">
         <div class="font-label-caps text-label-caps tracking-widest text-primary font-bold">DPC_MARIOJFS7</div>
         <div class="flex items-center gap-4">
-            <span
+            <span id="share-btn"
                 class="material-symbols-outlined text-primary hover:text-primary-fixed-dim transition-colors cursor-pointer scale-95 duration-200"
                 style="font-variation-settings: 'FILL' 0;">share</span>
         </div>
@@ -155,7 +155,8 @@
                 icon.innerText = 'check';
                 btn.classList.add('bg-green-600', 'text-white');
                 btn.classList.remove('bg-surface-container-highest', 'text-on-surface');
-
+                showToast('ID copiado com sucesso!');
+                
                 setTimeout(() => {
                     btnText.innerText = originalText;
                     icon.innerText = originalIcon;
@@ -192,6 +193,48 @@
 
         updateOnlineStatus();
         setInterval(updateOnlineStatus, 60000); // Update every minute
+
+        // Share functionality
+        document.getElementById('share-btn').addEventListener('click', function() {
+            const url = window.location.href;
+            const btn = this;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: url
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalIcon = btn.innerText;
+                    btn.innerText = 'check';
+                    btn.classList.add('text-green-500');
+                    showToast('Link copiado!');
+                    
+                    setTimeout(() => {
+                        btn.innerText = originalIcon;
+                        btn.classList.remove('text-green-500');
+                    }, 2000);
+                });
+            }
+        });
+
+        // Toast logic
+        const toast = document.createElement('div');
+        toast.className = 'toast font-label-caps text-label-caps';
+        toast.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> <span id="toast-message">Copiado!</span>';
+        document.body.appendChild(toast);
+
+        function showToast(message) {
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Global export if needed
+        window.showToast = showToast;
     </script>
 </body>
 
