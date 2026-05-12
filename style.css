@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to bottom, rgba(19, 19, 19, 0.85), rgba(19, 19, 19, 1)), url(https://lh3.googleusercontent.com/aida/ADBb0uhrlO7v55jJbnM3seib90_CX-41k_0VvTWJAw_Qmk_6BJBt66-199N8Dvqw64VbKCL4CAoIMRJG2P3pHu0rxuFO4G3Ztz4F7mXlzgEU7BcZfFpKMFk_KSv2k2Nfmw0moSOMtmUGxiA4YBPykXXTn5jkX2jiAtokuh4olJfjCbpVt4zDPJ9fxPMh1Rl8o3dJ4-Y6CBOKPK7hrrUilSO-cBPxvhOusSlgtCXcA6mCVdUDh4RK11wq4cReYnKVtZoU8f5SJ1pA5GbI8PM);
+    background-image: linear-gradient(to bottom, rgba(19, 19, 19, 0.85), rgba(19, 19, 19, 1)), url(/bg.png);
     background-size: cover;
     background-position: center;
     background-attachment: fixed
